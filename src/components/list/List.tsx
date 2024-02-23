@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import ListCard from './listCard/ListCard';
-import IList from '@/common/type/Type';
 import ICourse from '@/common/type/Type';
 
 export default function List({
@@ -27,12 +26,12 @@ const ListWrapper = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(5, 25rem);
-	grid-gap: 20px;
+	grid-gap: 0.5rem;
 
 	padding-top: 1rem;
 	padding-bottom: 2rem;
 
-	@media (min-width: 811px) and (max-width: 1200px) {
+	@media (min-width: 811px) and (max-width: 1300px) {
 		grid-template-columns: repeat(3, 1fr);
 	}
 

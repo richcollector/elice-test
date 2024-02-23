@@ -4,15 +4,14 @@ import ICourse from '@/common/type/Type';
 export default function ListCard({ list }: { list: ICourse }) {
 	return (
 		<CardWrapper>
-			<CardImg src="img/cardImg.png" alt="" />
+			{list.logo_file_url && <CardImg src={list.logo_file_url} alt="logo" />}
 			<CardBody>
 				<CardTitle>
-					<p style={{ color: '#524fa1', fontWeight: '600' }}>No categories</p>
-					<h1>PM/PO를 위한 서비스 기획</h1>
-					<p style={{ color: '#5e5f61' }}>결제한 수강료 지금도 받고, 나중에도 받자!</p>
+					<h1>{list.title}</h1>
+					<p style={{ color: '#5e5f61' }}>{list.short_description}</p>
 				</CardTitle>
 				<CardPrice>
-					<p style={{ color: '#524fa1', fontWeight: '600' }}>Register by Admin</p>
+					<p style={{ color: '#524fa1', fontWeight: '600' }}>{list.is_free ? 'Free' : 'Payment'}</p>
 				</CardPrice>
 			</CardBody>
 		</CardWrapper>
@@ -41,19 +40,23 @@ const CardWrapper = styled.div`
 
 const CardImg = styled.img`
 	width: 100%;
-	height: 30%;
-	object-fit: cover;
+	height: 40%;
+	object-fit: contain;
+
+	background-color: rgb(248, 248, 248);
+	padding: 0.5rem 0;
 `;
 
 const CardBody = styled.div`
 	width: 100%;
-	height: calc(100% - 30%);
+	height: calc(100% - 40%);
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 
+	border-top: 1px solid rgb(225, 226, 228);
 	padding: 0 1rem;
 `;
 
@@ -65,9 +68,8 @@ const CardTitle = styled.div`
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	gap: 1rem;
+	gap: 0.5rem;
 
-	border-bottom: 1px solid rgb(225, 226, 228);
 	padding-top: 1rem;
 `;
 
@@ -80,5 +82,6 @@ const CardPrice = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 
+	border-top: 1px solid rgb(225, 226, 228);
 	padding: 1rem 0;
 `;

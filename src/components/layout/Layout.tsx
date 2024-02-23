@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-	width: 1200px;
+	width: 1300px;
 
 	display: flex;
 	flex-direction: column;
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 
 	padding: 2rem 0;
 
-	@media (max-width: 1200px) {
+	@media (max-width: 1300px) {
 		padding: 2rem 1rem;
 		width: 100%;
 	}
