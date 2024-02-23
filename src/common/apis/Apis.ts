@@ -6,13 +6,13 @@ const instance = axios.create({
 });
 
 export const Apis = {
-	Get: () =>
+	Get: (page: number) =>
 		instance.get('', {
 			params: {
 				filter_conditions: JSON.stringify({
 					$and: [{ title: `%${''}%` }, { $or: [{ enroll_type: 0, is_free: true }] }],
 				}),
-				offset: 0,
+				offset: page === 1 ? 0 : (page - 1) * 20,
 				count: 20,
 			},
 		}),
