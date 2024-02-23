@@ -3,8 +3,11 @@ import List from '@/components/list/List';
 import Pagination from '@/components/paginations/Paginztions';
 import SearchBar from '@/components/search/SearchBar';
 import Head from 'next/head';
+import FirstPage from '@/common/hooks/useFirstPage';
 
 export default function Home() {
+	const { courses, courseCount } = FirstPage();
+
 	return (
 		<>
 			<Head>
@@ -13,8 +16,8 @@ export default function Home() {
 			</Head>
 			<SearchBar />
 			<Filter />
-			<List />
-			<Pagination />
+			{courses && <List courses={courses} courseCount={courseCount} />}
+			<Pagination courseCount={courseCount} />
 		</>
 	);
 }

@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 import ListCard from './listCard/ListCard';
+import IList from '@/common/type/Type';
+import ICourse from '@/common/type/Type';
 
-export default function List() {
+export default function List({
+	courses,
+	courseCount,
+}: {
+	courses: ICourse[];
+	courseCount: number;
+}) {
 	return (
 		<>
 			<TotalCard>
-				<span>228 total</span>
+				<span>{courseCount}</span>
 			</TotalCard>
 			<ListWrapper>
-				{new Array(10).fill(1).map((e, i) => (
-					<ListCard key={i} />
-				))}
+				{courses && courses.map(list => <ListCard key={list.id} list={list} />)}
 			</ListWrapper>
 		</>
 	);
@@ -20,7 +26,7 @@ const ListWrapper = styled.div`
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(3, 25rem);
+	grid-template-rows: repeat(5, 25rem);
 	grid-gap: 20px;
 
 	padding-top: 1rem;
