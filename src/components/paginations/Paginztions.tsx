@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export default function Pagination() {
+interface IPropsPaginations {
+	courseCount: number;
+}
+
+export default function Pagination({ courseCount }: IPropsPaginations) {
 	return (
 		<PaginationWrapper>
 			<Page $isActive={false}>

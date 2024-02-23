@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import ICourse from '@/common/type/Type';
 
-export default function ListCard() {
+export default function ListCard({ list }: { list: ICourse }) {
 	return (
 		<CardWrapper>
 			<CardImg src="img/cardImg.png" alt="" />
