@@ -6,7 +6,7 @@ import Head from 'next/head';
 import FirstPage from '@/common/hooks/useFirstPage';
 
 export default function Home() {
-	const { courses, courseCount, setPage } = FirstPage();
+	const { courses, courseCount, setPage, setFilter } = FirstPage();
 
 	return (
 		<>
@@ -15,7 +15,7 @@ export default function Home() {
 				<link rel="icon" href="logo/logo.png" />
 			</Head>
 			<SearchBar />
-			<Filter />
+			<Filter setFilter={setFilter} />
 			{courses && <List courses={courses} courseCount={courseCount} />}
 			<Pagination courseCount={courseCount} setPage={setPage} />
 		</>

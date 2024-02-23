@@ -6,17 +6,23 @@ export default function FirstPage() {
 	const [courses, setCourses] = useState<ICourse[]>();
 	const [courseCount, setCourseCount] = useState<number>(0);
 	const [page, setPage] = useState(1);
+	const [filter, setFilter] = useState<Array<any>>();
+	console.log('filter', filter);
 
 	useEffect(() => {
-		Apis.Get(page)
+		const free = { enroll_type: 0, is_free: true };
+		const payment = { enroll_type: 0, is_free: false };
+		// filter.map(e => {
+		// 	console.log('????', e);
+		// });
+
+		Apis.get(page, filter)
 			.then(res => {
 				setCourses(res.data.courses);
 				setCourseCount(res.data.course_count);
 			})
-			.catch(err => {
-				console.error(err);
-			});
-	}, [page]);
+			.catch(() => {});
+	}, [page, filter]);
 
-	return { courses, courseCount, setPage };
+	return { courses, courseCount, setPage, setFilter };
 }
