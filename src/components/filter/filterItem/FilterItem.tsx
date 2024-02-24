@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { IFilter } from '@/common/type/Type';
+import useQuery from '@/common/hooks/useQuery';
 
-interface IPropsItem {
-	item: string;
-	setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
-}
-
-export default function Item({ item, setFilter }: IPropsItem): JSX.Element {
+export default function Item({ item }: { item: string }): JSX.Element {
+	const { addQuery, clearQuery } = useQuery();
+	const searchParams = useSearchParams();
 	const [activedFilter, setActivedFilter] = useState(false);
 
 	const onClickFilter = (item: string) => () => {
+		if (!activedFilter) {
+			if (item === `Free`) addQuery('price', 'free');
+			if (item === `Payment`) addQuery('price', 'paid');
+		} else {
+			if (item === `Free`) clearQuery('price', 'free');
+			if (item === `Payment`) clearQuery('price', 'paid');
+		}
 		setActivedFilter(prev => !prev);
-		setFilter(prev => ({ ...prev, [item]: !activedFilter }));
 	};
 
 	return (
@@ -24,6 +27,7 @@ export default function Item({ item, setFilter }: IPropsItem): JSX.Element {
 }
 
 import styled from 'styled-components';
+import { useSearchParams } from 'next/navigation';
 const FilterItem = styled.div`
 	background-color: rgb(255, 255, 255);
 	padding: 0 0.5rem;

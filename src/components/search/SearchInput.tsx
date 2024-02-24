@@ -1,4 +1,5 @@
 import useInput from '@/common/hooks/useInput';
+import useQuery from '@/common/hooks/useQuery';
 
 export default function SearchInput() {
 	const { searchWord, handleInputChange } = useInput();

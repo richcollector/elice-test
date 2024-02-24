@@ -1,17 +1,12 @@
 import Item from './filterItem/FilterItem';
 import { FILTER_BUTTON_NAME } from '@/common/constant/Constant';
-import { IFilter } from '@/common/type/Type';
 
-export default function Filter({
-	setFilter,
-}: {
-	setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
-}) {
+export default function Filter() {
 	return (
 		<FilterWrapper>
 			<FilterTitle>Price</FilterTitle>
 			{FILTER_BUTTON_NAME.map((item: string, idx: number) => (
-				<Item key={idx} item={item} setFilter={setFilter} />
+				<Item key={idx} item={item} />
 			))}
 		</FilterWrapper>
 	);

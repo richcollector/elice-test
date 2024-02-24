@@ -18,8 +18,3 @@ export interface IList {
 	courseCount: number;
 	courses: ICourse[];
 }
-
-export interface IFilter {
-	Free: boolean;
-	Payment: boolean;
-}

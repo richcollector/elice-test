@@ -6,7 +6,7 @@ import Filter from '@/components/filter/Filter';
 import Pagination from '@/components/paginations/Paginations';
 
 export default function Home() {
-	const { courses, courseCount, setPage, setFilter } = useGetList();
+	const { courses, courseCount, setPage } = useGetList();
 
 	return (
 		<>
@@ -15,7 +15,7 @@ export default function Home() {
 				<link rel="icon" href="logo/logo.png" />
 			</Head>
 			<SearchBar />
-			<Filter setFilter={setFilter} />
+			<Filter />
 			{courses ? <List courses={courses} courseCount={courseCount} /> : <div>...Loading</div>}
 			<Pagination courseCount={courseCount} setPage={setPage} />
 		</>
