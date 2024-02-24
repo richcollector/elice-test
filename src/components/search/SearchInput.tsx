@@ -1,5 +1,16 @@
+import useInput from '@/common/hooks/useInput';
+
 export default function SearchInput() {
-	return <Input placeholder="Search for a language or skil you want to learn." />;
+	const { searchWord, handleInputChange } = useInput();
+
+	return (
+		<Input
+			type="text"
+			value={searchWord}
+			onChange={handleInputChange}
+			placeholder="Search for a language or skil you want to learn."
+		/>
+	);
 }
 
 import styled from 'styled-components';

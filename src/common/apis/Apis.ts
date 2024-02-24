@@ -6,12 +6,12 @@ const instance = axios.create({
 });
 
 export const Apis = {
-	get: (page: number, filterList: Array<Object>) => {
+	get: (title: string, filterList: Array<Object>, page: number) => {
 		return instance.get('', {
 			params: {
 				filter_conditions: JSON.stringify({
 					$and: [
-						{ title: `%${''}%` },
+						{ title: `%${title}%` },
 						{
 							$or: [...filterList],
 						},

@@ -19,7 +19,7 @@ export interface IList {
 	courses: ICourse[];
 }
 
-export interface IFilterType {
+export interface IFilter {
 	Free: boolean;
 	Payment: boolean;
 }

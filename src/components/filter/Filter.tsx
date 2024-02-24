@@ -1,11 +1,11 @@
 import Item from './filterItem/FilterItem';
 import { FILTER_BUTTON_NAME } from '@/common/constant/Constant';
-import { IFilterType } from '@/common/type/Type';
+import { IFilter } from '@/common/type/Type';
 
 export default function Filter({
 	setFilter,
 }: {
-	setFilter: React.Dispatch<React.SetStateAction<IFilterType>>;
+	setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
 }) {
 	return (
 		<FilterWrapper>

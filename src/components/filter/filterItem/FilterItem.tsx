@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { IFilterType } from '@/common/type/Type';
+import { IFilter } from '@/common/type/Type';
 
 interface IPropsItem {
 	item: string;
-	setFilter: React.Dispatch<React.SetStateAction<IFilterType>>;
+	setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
 }
 
 export default function Item({ item, setFilter }: IPropsItem): JSX.Element {

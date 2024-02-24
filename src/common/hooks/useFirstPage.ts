@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
-import { ICourse, IFilterType } from '../type/Type';
+import { ICourse, IFilter } from '../type/Type';
 import { Apis } from '../apis/Apis';
+import useInput from './useInput';
+import { useRouter } from 'next/router';
 
 export default function FirstPage() {
 	const [courses, setCourses] = useState<ICourse[]>();
 	const [courseCount, setCourseCount] = useState<number>(0);
 	const [page, setPage] = useState(1);
-	const [filter, setFilter] = useState<IFilterType>({ Free: false, Payment: false });
+	const [filter, setFilter] = useState<IFilter>({ Free: false, Payment: false });
+	const router = useRouter();
+	const searchWord = '';
 
 	useEffect(() => {
 		const filterList: Array<Object> = [];
@@ -20,13 +24,13 @@ export default function FirstPage() {
 			filterList.push(payment);
 		}
 
-		Apis.get(page, filterList)
+		Apis.get(searchWord, filterList, page)
 			.then(res => {
 				setCourses(res.data.courses);
 				setCourseCount(res.data.course_count);
 			})
 			.catch(() => {});
-	}, [page, filter]);
+	}, [searchWord, filter, page]);
 
 	return { courses, courseCount, setPage, setFilter };
 }
