@@ -16,7 +16,11 @@ export default function Home() {
 			</Head>
 			<SearchBar />
 			<Filter />
-			{courses ? <List courses={courses} courseCount={courseCount} /> : <div>...Loading</div>}
+			{courses ? (
+				<List courses={courses} courseCount={courseCount} />
+			) : (
+				<div style={{ height: '100vh' }}>...Loading</div>
+			)}
 			<Pagination courseCount={courseCount} setPage={setPage} />
 		</>
 	);

@@ -18,7 +18,7 @@ export default function useGetList() {
 	}, [router.query]);
 
 	useEffect(() => {
-		const title = String(getValue(QUERY_STRING.keyword)) ?? '';
+		const title = getValue(QUERY_STRING.keyword) ?? '';
 		const filter = getValue(QUERY_STRING.price);
 		const filterList: Array<Object> = [];
 

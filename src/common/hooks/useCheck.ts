@@ -44,13 +44,21 @@ export default function useCheck() {
 			});
 		} else {
 			delete router.query[key];
-			router.push(router);
+			router.push({
+				query: {
+					...router.query,
+				},
+			});
 		}
 	};
 
 	const clearKeyword = (key: string) => {
 		delete router.query[key];
-		router.push(router);
+		router.push({
+			query: {
+				...router.query,
+			},
+		});
 	};
 
 	const addKeywordCheck = (key: string, value: string) => {
