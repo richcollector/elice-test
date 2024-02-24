@@ -1,18 +1,23 @@
 import { useState } from 'react';
 import useQuery from '@/common/hooks/useQuery';
+import { QUERY_STRING, QUERY_STRING_value } from '@/common/constant/Constant';
+import { FILTER_LIST_NAME } from '@/common/constant/Constant';
 
 export default function Item({ item }: { item: string }): JSX.Element {
 	const { addQuery, clearQuery } = useQuery();
-	const searchParams = useSearchParams();
 	const [activedFilter, setActivedFilter] = useState(false);
 
 	const onClickFilter = (item: string) => () => {
 		if (!activedFilter) {
-			if (item === `Free`) addQuery('price', 'free');
-			if (item === `Payment`) addQuery('price', 'paid');
+			if (item === FILTER_LIST_NAME.Free)
+				addQuery(QUERY_STRING.price, QUERY_STRING_value.price.free);
+			if (item === FILTER_LIST_NAME.Payment)
+				addQuery(QUERY_STRING.price, QUERY_STRING_value.price.paid);
 		} else {
-			if (item === `Free`) clearQuery('price', 'free');
-			if (item === `Payment`) clearQuery('price', 'paid');
+			if (item === FILTER_LIST_NAME.Free)
+				clearQuery(QUERY_STRING.price, QUERY_STRING_value.price.free);
+			if (item === FILTER_LIST_NAME.Payment)
+				clearQuery(QUERY_STRING.price, QUERY_STRING_value.price.paid);
 		}
 		setActivedFilter(prev => !prev);
 	};
@@ -27,7 +32,6 @@ export default function Item({ item }: { item: string }): JSX.Element {
 }
 
 import styled from 'styled-components';
-import { useSearchParams } from 'next/navigation';
 const FilterItem = styled.div`
 	background-color: rgb(255, 255, 255);
 	padding: 0 0.5rem;
@@ -43,4 +47,8 @@ const ItemButton = styled.button<{ $isActive: boolean }>`
 	font-size: 1rem;
 
 	cursor: pointer;
+
+	&:hover {
+		filter: brightness(80%);
+	}
 `;

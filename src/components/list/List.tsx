@@ -11,7 +11,7 @@ export default function List({
 	return (
 		<>
 			<TotalCard>
-				<span>{courseCount}</span>
+				<span>{courseCount} total</span>
 			</TotalCard>
 			<ListWrapper>
 				{courses && courses.map(list => <ListCard key={list.id} list={list} />)}

@@ -14,10 +14,6 @@ export default function useGetList() {
 	const router = useRouter();
 
 	useEffect(() => {
-		setPage(1);
-	}, [router.query]);
-
-	useEffect(() => {
 		const title = getValue(QUERY_STRING.keyword) ?? '';
 		const filter = getValue(QUERY_STRING.price);
 		const filterList: Array<Object> = [];
@@ -44,7 +40,7 @@ export default function useGetList() {
 			.catch(error => {
 				if (error instanceof Error) console.error('error::', error.message);
 			});
-	}, [page, router.query]);
+	}, [page, router.query, getValue]);
 
 	return { courses, courseCount, setPage };
 }

@@ -19,9 +19,22 @@ export default function Home() {
 			{courses ? (
 				<List courses={courses} courseCount={courseCount} />
 			) : (
-				<div style={{ height: '100vh' }}>...Loading</div>
+				<LoadingWrapper>...Loading</LoadingWrapper>
 			)}
 			<Pagination courseCount={courseCount} setPage={setPage} />
 		</>
 	);
 }
+
+import styled from 'styled-components';
+const LoadingWrapper = styled.div`
+	width: 100%;
+	height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	font-size: 2rem;
+`;

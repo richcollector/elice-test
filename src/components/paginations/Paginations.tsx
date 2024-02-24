@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PAGE_PER_COUNT } from '@/common/constant/Constant';
 
 interface IPropsPaginations {
@@ -10,6 +10,12 @@ export default function Pagination({ courseCount, setPage }: IPropsPaginations) 
 	const [startPage, setStartPage] = useState(1);
 	const [activedPage, setActivedPage] = useState(1);
 	const lastPage = Math.ceil((courseCount ?? PAGE_PER_COUNT) / PAGE_PER_COUNT);
+	const router = useRouter();
+
+	useEffect(() => {
+		setPage(1);
+		setActivedPage(1);
+	}, [router.query, setPage]);
 
 	const onClickPage = (event: React.MouseEvent<HTMLSpanElement>): void => {
 		const activedPage = Number(event.currentTarget.id);
@@ -58,6 +64,7 @@ export default function Pagination({ courseCount, setPage }: IPropsPaginations) 
 }
 
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 const PaginationWrapper = styled.div`
 	display: flex;
 	flex-direction: row;

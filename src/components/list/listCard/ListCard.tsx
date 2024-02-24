@@ -1,16 +1,28 @@
 import { ICourse } from '@/common/type/Type';
+import { NO_IMAGE } from '@/common/constant/Constant';
+import { FILTER_LIST_NAME } from '@/common/constant/Constant';
 
 export default function ListCard({ list }: { list: ICourse }) {
 	return (
 		<CardWrapper>
-			{list.logo_file_url && <CardImg src={list.logo_file_url} alt="logo" />}
+			{list.logo_file_url ? (
+				<CardImg src={list.logo_file_url} alt="logo" />
+			) : (
+				<CardImg src={NO_IMAGE} alt="logo" />
+			)}
 			<CardBody>
 				<CardTitle>
 					<h1>{list.title}</h1>
 					<p>{list.short_description}</p>
 				</CardTitle>
 				<CardPrice>
-					<p>{list.is_free ? 'Free' : 'Payment'}</p>
+					<p>
+						{list.enroll_type
+							? list.is_free
+								? FILTER_LIST_NAME.Free
+								: FILTER_LIST_NAME.Payment
+							: 'Unclassified'}
+					</p>
 				</CardPrice>
 			</CardBody>
 		</CardWrapper>
@@ -34,7 +46,7 @@ const CardWrapper = styled.div`
 	cursor: pointer;
 
 	&:hover {
-		background-color: rgb(243, 244, 245);
+		filter: brightness(95%);
 	}
 `;
 
