@@ -1,68 +1,18 @@
 import { useRouter } from 'next/router';
+import useCheck from './useCheck';
 
 export default function useQuery() {
 	const router = useRouter();
+	const { addPriceCheck, addKeywordCheck, clearPrice, clearKeyword } = useCheck();
 
 	const addQuery = (key: string, value: string) => {
-		const before = router.query[key];
-		console.log('before', before);
-
-		if (key === 'price' && before && Array.isArray(before)) {
-			router.push({
-				query: {
-					...router.query,
-					[key]: [...before, value],
-				},
-			});
-		} else if (key === 'price' && before && !Array.isArray(before)) {
-			router.push({
-				query: {
-					...router.query,
-					[key]: [before, value],
-				},
-			});
-		} else {
-			router.push({
-				query: {
-					...router.query,
-					[key]: value,
-				},
-			});
-		}
-
-		if (key === 'keyword') {
-			router.push({
-				query: {
-					...router.query,
-					[key]: value,
-				},
-			});
-		}
+		addPriceCheck(key, value);
+		addKeywordCheck(key, value);
 	};
 
 	const clearQuery = (key: string, value?: string) => {
-		if (key === 'keyword') {
-			delete router.query[key];
-			router.push(router);
-		}
-
-		if (key === 'price') {
-			const before = router.query[key];
-
-			if (Array.isArray(before)) {
-				const priceArr = before.filter(price => price !== value);
-
-				router.push({
-					query: {
-						...router.query,
-						[key]: priceArr,
-					},
-				});
-			} else {
-				delete router.query[key];
-				router.push(router);
-			}
-		}
+		clearPrice(key, value);
+		clearKeyword(key);
 	};
 
 	const getValue = (key: string) => {
