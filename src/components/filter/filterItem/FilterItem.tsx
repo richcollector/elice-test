@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { IFilterType } from '@/common/type/Type';
 
 interface IPropsItem {
@@ -10,12 +9,10 @@ interface IPropsItem {
 export default function Item({ item, setFilter }: IPropsItem): JSX.Element {
 	const [activedFilter, setActivedFilter] = useState(false);
 
-	const onClickFilter =
-		(item: string) =>
-		(event: React.MouseEvent<HTMLSpanElement>): void => {
-			setActivedFilter(prev => !prev);
-			setFilter(prev => ({ ...prev, [item]: !activedFilter }));
-		};
+	const onClickFilter = (item: string) => () => {
+		setActivedFilter(prev => !prev);
+		setFilter(prev => ({ ...prev, [item]: !activedFilter }));
+	};
 
 	return (
 		<FilterItem>
@@ -26,6 +23,7 @@ export default function Item({ item, setFilter }: IPropsItem): JSX.Element {
 	);
 }
 
+import styled from 'styled-components';
 const FilterItem = styled.div`
 	background-color: rgb(255, 255, 255);
 	padding: 0 0.5rem;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Apis } from '../apis/Apis';
 import { ICourse, IFilterType } from '../type/Type';
+import { Apis } from '../apis/Apis';
 
 export default function FirstPage() {
 	const [courses, setCourses] = useState<ICourse[]>();

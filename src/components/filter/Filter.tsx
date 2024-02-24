@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Item from './filterItem/FilterItem';
 import { FILTER_BUTTON_NAME } from '@/common/constant/Constant';
 import { IFilterType } from '@/common/type/Type';
@@ -18,6 +17,7 @@ export default function Filter({
 	);
 }
 
+import styled from 'styled-components';
 const FilterWrapper = styled.div`
 	width: 100%;
 

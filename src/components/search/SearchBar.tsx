@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import SearchInput from './SearchInput';
 import SearchIcon from './SearchIcon';
 
@@ -11,6 +10,7 @@ export default function SearchBar() {
 	);
 }
 
+import styled from 'styled-components';
 const SearchBarWrapper = styled.div`
 	width: 100%;
 	display: flex;

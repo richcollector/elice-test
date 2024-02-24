@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { ICourse } from '@/common/type/Type';
 
 export default function ListCard({ list }: { list: ICourse }) {
@@ -8,16 +7,17 @@ export default function ListCard({ list }: { list: ICourse }) {
 			<CardBody>
 				<CardTitle>
 					<h1>{list.title}</h1>
-					<p style={{ color: '#5e5f61' }}>{list.short_description}</p>
+					<p>{list.short_description}</p>
 				</CardTitle>
 				<CardPrice>
-					<p style={{ color: '#524fa1', fontWeight: '600' }}>{list.is_free ? 'Free' : 'Payment'}</p>
+					<p>{list.is_free ? 'Free' : 'Payment'}</p>
 				</CardPrice>
 			</CardBody>
 		</CardWrapper>
 	);
 }
 
+import styled from 'styled-components';
 const CardWrapper = styled.div`
 	width: 100%;
 	height: 100%;
@@ -71,6 +71,10 @@ const CardTitle = styled.div`
 	gap: 0.5rem;
 
 	padding-top: 1rem;
+
+	p {
+		color: #5e5f61;
+	}
 `;
 
 const CardPrice = styled.div`
@@ -84,4 +88,9 @@ const CardPrice = styled.div`
 
 	border-top: 1px solid rgb(225, 226, 228);
 	padding: 1rem 0;
+
+	p {
+		color: #524fa1;
+		font-weight: 600;
+	}
 `;

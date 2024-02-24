@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 export default function SearchIcon() {
 	return (
 		<SearchIconWrapper>
@@ -8,6 +6,7 @@ export default function SearchIcon() {
 	);
 }
 
+import styled from 'styled-components';
 const SearchIconWrapper = styled.div`
 	display: flex;
 	flex-direction: column;

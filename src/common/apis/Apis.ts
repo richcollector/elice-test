@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { URL } from '@/common/constant/Constant';
+import { URL, PAGE_PER_COUNT } from '@/common/constant/Constant';
 
 const instance = axios.create({
 	baseURL: URL,
@@ -17,8 +17,8 @@ export const Apis = {
 						},
 					],
 				}),
-				offset: page === 1 ? 0 : (page - 1) * 20,
-				count: 20,
+				offset: page === 1 ? 0 : (page - 1) * PAGE_PER_COUNT,
+				count: PAGE_PER_COUNT,
 			},
 		});
 	},

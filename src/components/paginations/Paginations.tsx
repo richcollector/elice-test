@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { PAGE_PER_COUNT } from '@/common/constant/Constant';
 
 interface IPropsPaginations {
@@ -58,6 +57,7 @@ export default function Pagination({ courseCount, setPage }: IPropsPaginations) 
 	);
 }
 
+import styled from 'styled-components';
 const PaginationWrapper = styled.div`
 	display: flex;
 	flex-direction: row;

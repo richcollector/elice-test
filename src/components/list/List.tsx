@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import ListCard from './listCard/ListCard';
 import { ICourse } from '@/common/type/Type';
 
@@ -21,6 +20,7 @@ export default function List({
 	);
 }
 
+import styled from 'styled-components';
 const ListWrapper = styled.div`
 	width: 100%;
 	display: grid;

@@ -1,7 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ORIGIN_URL } from '@/common/constant/Constant';
-import axios from 'axios';
 import { IList } from '@/common/type/Type';
 
 const instance = axios.create({

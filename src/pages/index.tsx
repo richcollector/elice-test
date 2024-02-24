@@ -1,9 +1,9 @@
-import Filter from '@/components/filter/Filter';
-import List from '@/components/list/List';
-import Pagination from '@/components/paginations/Paginations';
-import SearchBar from '@/components/search/SearchBar';
 import Head from 'next/head';
 import FirstPage from '@/common/hooks/useFirstPage';
+import SearchBar from '@/components/search/SearchBar';
+import List from '@/components/list/List';
+import Filter from '@/components/filter/Filter';
+import Pagination from '@/components/paginations/Paginations';
 
 export default function Home() {
 	const { courses, courseCount, setPage, setFilter } = FirstPage();
