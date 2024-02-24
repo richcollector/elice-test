@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ICourse from '@/common/type/Type';
+import { ICourse } from '@/common/type/Type';
 
 export default function ListCard({ list }: { list: ICourse }) {
 	return (

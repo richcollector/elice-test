@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { IFilterType } from '@/common/type/Type';
 
 interface IPropsItem {
 	item: string;
-	setFilter: React.Dispatch<React.SetStateAction<Array<any>>>;
+	setFilter: React.Dispatch<React.SetStateAction<IFilterType>>;
 }
 
 export default function Item({ item, setFilter }: IPropsItem): JSX.Element {
@@ -12,9 +13,8 @@ export default function Item({ item, setFilter }: IPropsItem): JSX.Element {
 	const onClickFilter =
 		(item: string) =>
 		(event: React.MouseEvent<HTMLSpanElement>): void => {
-			const newValue = { [item]: activedFilter };
 			setActivedFilter(prev => !prev);
-			setFilter(prev => [...prev, newValue]);
+			setFilter(prev => ({ ...prev, [item]: !activedFilter }));
 		};
 
 	return (

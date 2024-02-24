@@ -1,4 +1,4 @@
-export default interface ICourse {
+export interface ICourse {
 	id: number;
 	enroll_type: number;
 	price: string;
@@ -14,7 +14,12 @@ export default interface ICourse {
 	is_free: boolean;
 }
 
-export default interface IList {
+export interface IList {
 	courseCount: number;
 	courses: ICourse[];
+}
+
+export interface IFilterType {
+	Free: boolean;
+	Payment: boolean;
 }

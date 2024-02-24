@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ORIGIN_URL } from '@/common/constant/Constant';
 import axios from 'axios';
-import IList from '@/common/type/Type';
+import { IList } from '@/common/type/Type';
 
 const instance = axios.create({
 	baseURL: ORIGIN_URL,
