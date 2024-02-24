@@ -1,6 +1,6 @@
 {
 	"extends": ["next/core-web-vitals", "prettier"],
-	"rule": {
+	"rules": {
 		"no-var": "error",
 		"no-multiple-empty-lines": "error",
 		"no-console": ["warn", { "allow": ["warn", "error", "info"] }],
