@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ICourse, IFilter } from '../type/Type';
 import { Apis } from '../apis/Apis';
-import useInput from './useInput';
 import { useRouter } from 'next/router';
 
 export default function FirstPage() {

@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import FirstPage from '@/common/hooks/useFirstPage';
+import useGetList from '@/common/hooks/useGetList';
 import SearchBar from '@/components/search/SearchBar';
 import List from '@/components/list/List';
 import Filter from '@/components/filter/Filter';
 import Pagination from '@/components/paginations/Paginations';
 
 export default function Home() {
-	const { courses, courseCount, setPage, setFilter } = FirstPage();
+	const { courses, courseCount, setPage, setFilter } = useGetList();
 
 	return (
 		<>
