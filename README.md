@@ -19,7 +19,7 @@
 |      Search      |                                                                                 search input값의 최적화를 위해 debounce를 설정하여 사용하였습니다.</br>Filter와 마찬가지로 값을 자동세팅하고 활성화하였습니다(새로고침).                                                                                 |
 |    Pagination    |                                                                                                         ` useRouter()`로 `router.query`가 변경 될 때, 1번페이지가 활성화되도록 설정 하였습니다.                                                                                                          |
 | State Management |                                                                                                      router.query의 사용으로 `useState()`만을 사용하여,<br/> 추가 라이브러리 사용을 지양하였습니다.                                                                                                      |
-|       API        |                     server에서 API를 가져오도록 하기 위하여, Next.js를 이용하여 CROS에러를 처리하였습니다.</br> Apis.ts를 만들어 손쉽게 API를 사용할 수 있도록 instance로 나누어 설정하였습니다.</br>hooks를 기능별로 나누어 코드의 가독성을 높이고, 유지보수가 좋게 작성하였습니다.                     |
+|       API        |                  server에서 API를 가져오도록 하기 위하여,<br/> Next.js를 이용하여 CROS에러를 처리하였습니다.</br> Apis.ts를 만들어 손쉽게 API를 사용할 수 있도록 instance로 나누어 설정하였습니다.</br>hooks를 기능별로 나누어 코드의 가독성을 높이고, 유지보수가 좋게 작성하였습니다.                   |
 
 전체적인 magic number를 최소화하기 위하여, Constant에 고정된 값들을 넣어 사용하였습니다.
 
