@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { QUERY_STRING } from '../constant/Constant';
 import useQuery from './useQuery';
 import useDebouce from './useDebounce';
-import { QUERY_STRING } from '../constant/Constant';
 
 export default function useInput() {
 	const { addQuery, clearQuery } = useQuery();

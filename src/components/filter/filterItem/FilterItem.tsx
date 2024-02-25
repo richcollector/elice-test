@@ -11,12 +11,12 @@ export default function Item({ item }: { item: string }): JSX.Element {
 		if (!activedFilter) {
 			if (item === FILTER_LIST_NAME.Free)
 				addQuery(QUERY_STRING.price, QUERY_STRING_value.price.free);
-			if (item === FILTER_LIST_NAME.Payment)
+			else if (item === FILTER_LIST_NAME.Payment)
 				addQuery(QUERY_STRING.price, QUERY_STRING_value.price.paid);
 		} else {
 			if (item === FILTER_LIST_NAME.Free)
 				clearQuery(QUERY_STRING.price, QUERY_STRING_value.price.free);
-			if (item === FILTER_LIST_NAME.Payment)
+			else if (item === FILTER_LIST_NAME.Payment)
 				clearQuery(QUERY_STRING.price, QUERY_STRING_value.price.paid);
 		}
 		setActivedFilter(prev => !prev);

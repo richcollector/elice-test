@@ -15,7 +15,7 @@ export default function Pagination({ courseCount, setPage }: IPropsPaginations) 
 	useEffect(() => {
 		setPage(1);
 		setActivedPage(1);
-	}, [router.query, setPage]);
+	}, [router.query]);
 
 	const onClickPage = (event: React.MouseEvent<HTMLSpanElement>): void => {
 		const activedPage = Number(event.currentTarget.id);

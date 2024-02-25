@@ -1,5 +1,4 @@
 import useInput from '@/common/hooks/useInput';
-import useQuery from '@/common/hooks/useQuery';
 
 export default function SearchInput() {
 	const { searchWord, handleInputChange } = useInput();
@@ -9,7 +8,7 @@ export default function SearchInput() {
 			type="text"
 			value={searchWord}
 			onChange={handleInputChange}
-			placeholder="Search for a language or skil you want to learn."
+			placeholder="Search for a language or skill you want to learn."
 		/>
 	);
 }

@@ -6,8 +6,8 @@ const instance = axios.create({
 });
 
 export const Apis = {
-	get: (title: string | string[], filterList: Array<Object>, page: number) => {
-		return instance.get('', {
+	get: async (title: string | string[], filterList: Array<Object>, page: number) => {
+		return await instance.get('', {
 			params: {
 				filter_conditions: JSON.stringify({
 					$and: [

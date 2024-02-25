@@ -17,7 +17,8 @@ export default function useQuery() {
 	};
 
 	const getValue = (key: string) => {
-		return router.query[key];
+		const before = router.query[key];
+		return before;
 	};
 
 	return { addQuery, clearQuery, getValue };

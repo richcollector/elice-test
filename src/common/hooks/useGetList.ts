@@ -15,7 +15,7 @@ export default function useGetList() {
 
 	useEffect(() => {
 		const title = getValue(QUERY_STRING.keyword) ?? '';
-		const filter = getValue(QUERY_STRING.price);
+		const filter = getValue(QUERY_STRING.price) ?? [];
 		const filterList: Array<Object> = [];
 
 		if (Array.isArray(filter)) {
@@ -40,7 +40,7 @@ export default function useGetList() {
 			.catch(error => {
 				if (error instanceof Error) console.error('error::', error.message);
 			});
-	}, [page, router.query, getValue]);
+	}, [page, router.query]);
 
 	return { courses, courseCount, setPage };
 }

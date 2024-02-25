@@ -6,7 +6,7 @@ export default function useCheck() {
 	const addPriceCheck = (key: string, value: string) => {
 		const before = router.query[key];
 
-		if (before && Array.isArray(before)) {
+		if (Array.isArray(before)) {
 			router.push({
 				query: {
 					...router.query,
