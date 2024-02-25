@@ -1,11 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useQuery from '@/common/hooks/useQuery';
 import { QUERY_STRING, QUERY_STRING_value } from '@/common/constant/Constant';
 import { FILTER_LIST_NAME } from '@/common/constant/Constant';
 
 export default function Item({ item }: { item: string }): JSX.Element {
-	const { addQuery, clearQuery } = useQuery();
+	const router = useRouter();
+	const { addQuery, clearQuery, getValue } = useQuery();
 	const [activedFilter, setActivedFilter] = useState(false);
+
+	useEffect(() => {
+		const before = getValue(QUERY_STRING.price) ?? [];
+		const checkItem =
+			item === FILTER_LIST_NAME.Free
+				? QUERY_STRING_value.price.free
+				: QUERY_STRING_value.price.paid;
+
+		if (before && Array.isArray(before && before.includes(checkItem))) {
+			setActivedFilter(true);
+		} else if (before && !Array.isArray(before) && before === checkItem) {
+			setActivedFilter(true);
+		}
+	}, [router.query]);
 
 	const onClickFilter = (item: string) => () => {
 		if (!activedFilter) {
@@ -32,6 +47,7 @@ export default function Item({ item }: { item: string }): JSX.Element {
 }
 
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 const FilterItem = styled.div`
 	background-color: rgb(255, 255, 255);
 	padding: 0 0.5rem;
