@@ -10,12 +10,13 @@ export default function Item({ item }: { item: string }): JSX.Element {
 
 	useEffect(() => {
 		const before = getValue(QUERY_STRING.price) ?? [];
+
 		const checkItem =
 			item === FILTER_LIST_NAME.Free
 				? QUERY_STRING_value.price.free
 				: QUERY_STRING_value.price.paid;
 
-		if (before && Array.isArray(before && before.includes(checkItem))) {
+		if (before && Array.isArray(before) && before.includes(checkItem)) {
 			setActivedFilter(true);
 		} else if (before && !Array.isArray(before) && before === checkItem) {
 			setActivedFilter(true);
