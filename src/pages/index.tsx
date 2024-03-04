@@ -6,7 +6,7 @@ import Filter from '@/components/filter/Filter';
 import Pagination from '@/components/paginations/Paginations';
 
 export default function Home() {
-	const { courses, courseCount, setPage } = useGetList();
+	const { courses, pageCount, currentPage, getPage } = useGetList();
 
 	return (
 		<>
@@ -17,11 +17,11 @@ export default function Home() {
 			<SearchBar />
 			<Filter />
 			{courses ? (
-				<List courses={courses} courseCount={courseCount} />
+				<List courses={courses} pageCount={pageCount} />
 			) : (
 				<LoadingWrapper>...Loading</LoadingWrapper>
 			)}
-			<Pagination courseCount={courseCount} setPage={setPage} />
+			<Pagination pageCount={pageCount} currentPage={currentPage} getPage={getPage} />
 		</>
 	);
 }

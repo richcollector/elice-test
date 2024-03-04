@@ -57,3 +57,10 @@
     - api : server에서 api를 가져오도록 설정
     - \_app : Layout, GlobalStyle 적용
     - \_document : `ServerStyleSheet` 설정
+
+### 피드백
+
+- 짧은 기간 내에 과제물을 완성하신 점과 Search & Filter 기능과 responsive 측면의 요청사항을 거의 대부분 구현
+
+- Dummy로직과 domain 로직이 적절히 분리되지 않은 점, useEffect를 적절히 사용하지 못한 부분
+  - 피드백을 토대로 수정할 예정입니다.

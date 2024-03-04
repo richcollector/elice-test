@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
-import { ICourse } from '../type/Type';
+import { IList } from '../type/Type';
 import { Apis } from '../apis/Apis';
 import { useRouter } from 'next/router';
 import useQuery from './useQuery';
 import { QUERY_STRING, QUERY_STRING_value } from '../constant/Constant';
 
 export default function useGetList() {
-	const [courses, setCourses] = useState<ICourse[]>();
-	const [courseCount, setCourseCount] = useState<number>(0);
+	const [courses, setCourses] = useState<IList>();
 	const [page, setPage] = useState(1);
 	const { getValue } = useQuery();
 
 	const router = useRouter();
 
 	useEffect(() => {
+		setPage(1);
+	}, [router.query]);
+
+	useEffect(() => {
+		if (!router.isReady) return;
+
 		const title = getValue(QUERY_STRING.keyword) ?? '';
 		const filter = getValue(QUERY_STRING.price) ?? [];
 		const filterList: Array<Object> = [];
@@ -35,12 +40,22 @@ export default function useGetList() {
 		Apis.get(title, filterList, page)
 			.then(res => {
 				setCourses(res.data.courses);
-				setCourseCount(res.data.course_count);
 			})
 			.catch(error => {
 				if (error instanceof Error) console.error('error::', error.message);
 			});
-	}, [page, router.query]);
+	}, [page, router.query, router.isReady]);
 
-	return { courses, courseCount, setPage };
+	const getPage = (page: number) => {
+		window.scrollTo({ top: 0 });
+		setPage(page);
+	};
+
+	return {
+		courses,
+		pageCount: courses ? Math.ceil(courses.courseCount / 20) : 0,
+		currentPage: page,
+		setPage,
+		getPage,
+	};
 }

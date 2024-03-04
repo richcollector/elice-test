@@ -1,70 +1,53 @@
-import { useEffect, useState } from 'react';
-import { PAGE_PER_COUNT } from '@/common/constant/Constant';
+import { PAGE } from '@/common/constant/Constant';
 
-interface IPropsPaginations {
-	courseCount: number;
-	setPage: React.Dispatch<React.SetStateAction<number>>;
-}
+const getRenderPageArray = (pageCount: number, currentPage: number) => {
+	const pageEnd =
+		currentPage + PAGE.SHOW_LIMIT > pageCount ? pageCount : currentPage + PAGE.SHOW_LIMIT;
+	const pageStart = currentPage - PAGE.SHOW_LIMIT > 0 ? currentPage - PAGE.SHOW_LIMIT : 1;
 
-export default function Pagination({ courseCount, setPage }: IPropsPaginations) {
-	const [startPage, setStartPage] = useState(1);
-	const [activedPage, setActivedPage] = useState(1);
-	const lastPage = Math.ceil((courseCount ?? PAGE_PER_COUNT) / PAGE_PER_COUNT);
-	const router = useRouter();
+	return Array.from({ length: pageEnd - pageStart + 1 }).map((_, i) => i + pageStart);
+};
 
-	useEffect(() => {
-		setPage(1);
-		setActivedPage(1);
-	}, [router.query]);
+export default function Pagination({
+	pageCount,
+	currentPage,
+	getPage,
+}: {
+	pageCount: number;
+	currentPage: number;
+	getPage: (page: number) => void;
+}) {
+	const renderPageArray = getRenderPageArray(pageCount, currentPage);
 
-	const onClickPage = (event: React.MouseEvent<HTMLSpanElement>): void => {
-		const activedPage = Number(event.currentTarget.id);
-		setActivedPage(activedPage);
-		setPage(Number(event.currentTarget.id));
-	};
-
-	const onClickPrevPage = (): void => {
-		if (startPage === 1) return;
-		setStartPage(startPage - 5);
-		setActivedPage(startPage - 5);
-		setPage(startPage - 5);
-	};
-
-	const onClickNextPage = (): void => {
-		if (startPage + 5 <= lastPage) {
-			setStartPage(startPage + 5);
-			setActivedPage(startPage + 5);
-			setPage(startPage + 5);
-		}
-	};
+	const onClickPrevPage = () => currentPage !== 1 && getPage(currentPage - 1);
+	const onClickNextPage = () => currentPage !== pageCount && getPage(currentPage + 1);
 
 	return (
 		<PaginationWrapper>
-			<Page $isActive={false} onClick={onClickPrevPage}>
-				<Arrow src="icon/arrowLeft.svg" alt="arrowLeft" />
-			</Page>
-			{new Array(5).fill(1).map(
-				(_, index) =>
-					startPage + index <= lastPage && (
-						<Page
-							key={startPage + index}
-							id={String(startPage + index)}
-							onClick={onClickPage}
-							$isActive={startPage + index === activedPage}
-						>
-							{startPage + index}
-						</Page>
-					),
-			)}
-			<Page $isActive={false} onClick={onClickNextPage}>
-				<Arrow src="icon/arrowRight.svg" alt="arrowRight" />
-			</Page>
+			<Arrow
+				src="icon/arrowLeft.svg"
+				alt="arrowLeft"
+				$isCheckArrow={currentPage === 1}
+				onClick={onClickPrevPage}
+			/>
+
+			{renderPageArray.map(number => (
+				<Page key={number} onClick={() => getPage(number)} $isActive={number === currentPage}>
+					{number}
+				</Page>
+			))}
+
+			<Arrow
+				src="icon/arrowRight.svg"
+				alt="arrowRight"
+				$isCheckArrow={currentPage === pageCount}
+				onClick={onClickNextPage}
+			/>
 		</PaginationWrapper>
 	);
 }
 
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
 const PaginationWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -79,10 +62,11 @@ const Page = styled.button<{ $isActive: boolean }>`
 	background-color: ${props => (props.$isActive ? '#524fa1' : '')};
 	font-weight: ${props => (props.$isActive ? 'bold' : 'normal')};
 	cursor: ${props => (props.$isActive ? 'none' : 'pointer')};
-
 	border: 0;
 `;
 
-const Arrow = styled.img`
+const Arrow = styled.img<{ $isCheckArrow: boolean }>`
 	width: 0.8rem;
+	color: ${props => (props.$isCheckArrow ? '#fff' : '#999')};
+	cursor: ${props => (props.$isCheckArrow ? 'none' : 'pointer')};
 `;

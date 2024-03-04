@@ -1,20 +1,14 @@
 import ListCard from './listCard/ListCard';
-import { ICourse } from '@/common/type/Type';
+import { IList } from '@/common/type/Type';
 
-export default function List({
-	courses,
-	courseCount,
-}: {
-	courses: ICourse[];
-	courseCount: number;
-}) {
+export default function List({ courses, pageCount }: { courses: IList; pageCount: number }) {
 	return (
 		<>
 			<TotalCard>
-				<span>{courseCount} total</span>
+				<span>{courses.courseCount} total</span>
 			</TotalCard>
 			<ListWrapper>
-				{courses && courses.map(list => <ListCard key={list.id} list={list} />)}
+				{courses && courses.courses.map(list => <ListCard key={list.id} list={list} />)}
 			</ListWrapper>
 		</>
 	);
