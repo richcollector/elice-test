@@ -1,12 +1,13 @@
 import Item from './filterItem/FilterItem';
-import { FILTER_BUTTON_NAME } from '@/common/constant/Constant';
+import { CHIPS } from '@/common/constant/Constant';
 
 export default function Filter() {
+	const PRICE_CHIPS_ARRAY = Object.values(CHIPS.price);
 	return (
 		<FilterWrapper>
 			<FilterTitle>Price</FilterTitle>
-			{FILTER_BUTTON_NAME.map((item: string, idx: number) => (
-				<Item key={idx} item={item} />
+			{PRICE_CHIPS_ARRAY.map(chip => (
+				<Item key={chip.value} type="price" value={chip.value} />
 			))}
 		</FilterWrapper>
 	);

@@ -1,54 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { ChipType, ChipValue } from '@/common/type/Type';
 import useQuery from '@/common/hooks/useQuery';
-import { QUERY_STRING, QUERY_STRING_value } from '@/common/constant/Constant';
-import { FILTER_LIST_NAME } from '@/common/constant/Constant';
 
-export default function Item({ item }: { item: string }): JSX.Element {
-	const router = useRouter();
-	const { addQuery, clearQuery, getValue } = useQuery();
-	const [activedFilter, setActivedFilter] = useState(false);
+interface ChipProps {
+	type: ChipType;
+	value: ChipValue;
+}
 
-	useEffect(() => {
-		const before = getValue(QUERY_STRING.price) ?? [];
+export default function Item({ type, value }: ChipProps) {
+	const { add, remove, search } = useQuery();
+	const [activedFilter, setActivedFilter] = useState(search(type, value));
 
-		const checkItem =
-			item === FILTER_LIST_NAME.Free
-				? QUERY_STRING_value.price.free
-				: QUERY_STRING_value.price.paid;
+	const handleClick = () => () => {
+		if (!activedFilter) add(type, value);
+		else remove(type, value);
 
-		if (before && Array.isArray(before) && before.includes(checkItem)) {
-			setActivedFilter(true);
-		} else if (before && !Array.isArray(before) && before === checkItem) {
-			setActivedFilter(true);
-		}
-	}, [router.query]);
-
-	const onClickFilter = (item: string) => () => {
-		if (!activedFilter) {
-			if (item === FILTER_LIST_NAME.Free)
-				addQuery(QUERY_STRING.price, QUERY_STRING_value.price.free);
-			else if (item === FILTER_LIST_NAME.Payment)
-				addQuery(QUERY_STRING.price, QUERY_STRING_value.price.paid);
-		} else {
-			if (item === FILTER_LIST_NAME.Free)
-				clearQuery(QUERY_STRING.price, QUERY_STRING_value.price.free);
-			else if (item === FILTER_LIST_NAME.Payment)
-				clearQuery(QUERY_STRING.price, QUERY_STRING_value.price.paid);
-		}
 		setActivedFilter(prev => !prev);
 	};
 
 	return (
 		<FilterItem>
-			<ItemButton onClick={onClickFilter(item)} $isActive={activedFilter}>
-				{item}
+			<ItemButton onClick={handleClick} $isActive={activedFilter}>
+				{CHIPS[type][value].title}
 			</ItemButton>
 		</FilterItem>
 	);
 }
 
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
+import { CHIPS } from '@/common/constant/Constant';
 const FilterItem = styled.div`
 	background-color: rgb(255, 255, 255);
 	padding: 0 0.5rem;

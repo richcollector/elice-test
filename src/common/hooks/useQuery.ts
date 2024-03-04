@@ -1,25 +1,64 @@
+import { CHIPS, CHIPS_ARRAY } from '@/common/constant/Constant';
 import { useRouter } from 'next/router';
-import useCheck from './useCheck';
-import { QUERY_STRING } from '../constant/Constant';
+import { QueryKey } from '../type/Type';
+import {
+	addEachQueryValue,
+	alreadyExistQueryValue,
+	removeEachQueryValue,
+} from '@/common/utils/routerQueryString';
 
 export default function useQuery() {
 	const router = useRouter();
-	const { addPriceCheck, addKeywordCheck, clearPrice, clearKeyword } = useCheck();
 
-	const addQuery = (key: string, value: string) => {
-		key === QUERY_STRING.price && addPriceCheck(key, value);
-		key === QUERY_STRING.keyword && addKeywordCheck(key, value);
+	const add = (key: QueryKey, value: string) => {
+		const currentQueryValue = addEachQueryValue(router.query[key], value);
+		router.push({
+			query: {
+				...router.query,
+				[key]: currentQueryValue,
+			},
+		});
 	};
 
-	const clearQuery = (key: string, value?: string) => {
-		key === QUERY_STRING.price && clearPrice(key, value);
-		key === QUERY_STRING.keyword && clearKeyword(key);
+	const remove = (key: QueryKey, value: string) => {
+		const currentQueryValue = removeEachQueryValue(router.query[key], value);
+		if (currentQueryValue)
+			router.push({
+				query: {
+					...router.query,
+					[key]: currentQueryValue,
+				},
+			});
+		else {
+			delete router.query[key];
+			router.push(router);
+		}
 	};
 
-	const getValue = (key: string) => {
-		const before = router.query[key];
-		return before;
+	const clear = (key: QueryKey) => {
+		delete router.query[key];
+		router.push(router);
 	};
 
-	return { addQuery, clearQuery, getValue };
+	const change = (key: QueryKey, value: string) => {
+		router.push({ query: { ...router.query, [key]: value } });
+	};
+
+	const getValue = (key: QueryKey) => {
+		return router.query[key];
+	};
+
+	const search = (key: QueryKey, searchValue: string) => {
+		return alreadyExistQueryValue(router.query[key], searchValue);
+	};
+
+	const getAllParams = () => {
+		const result = CHIPS_ARRAY.map(chip =>
+			Object.values(CHIPS[chip]).filter(({ value }) => search(chip, value)),
+		).flat();
+
+		return result.map(chipValue => chipValue.params);
+	};
+
+	return { add, remove, clear, change, getValue, search, getAllParams };
 }

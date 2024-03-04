@@ -4,12 +4,12 @@ import useQuery from '@/common/hooks/useQuery';
 import { useSearchParams } from 'next/navigation';
 
 export default function SearchInput() {
-	const { addQuery, clearQuery } = useQuery();
+	const { change, clear } = useQuery();
 	const searchParams = useSearchParams();
 
 	const debounce = useDebouce<string>(keyword => {
-		if (keyword) addQuery('keyword', keyword);
-		else clearQuery('keyword');
+		if (keyword) change('keyword', keyword);
+		else clear('keyword');
 	}, 300);
 
 	const { value, handleChange } = useInput(searchParams.get('keyword') || '', debounce);
