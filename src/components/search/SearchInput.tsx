@@ -1,13 +1,24 @@
+import useDebouce from '@/common/hooks/useDebounce';
 import useInput from '@/common/hooks/useInput';
+import useQuery from '@/common/hooks/useQuery';
+import { useSearchParams } from 'next/navigation';
 
 export default function SearchInput() {
-	const { searchWord, handleInputChange } = useInput();
+	const { addQuery, clearQuery } = useQuery();
+	const searchParams = useSearchParams();
+
+	const debounce = useDebouce<string>(keyword => {
+		if (keyword) addQuery('keyword', keyword);
+		else clearQuery('keyword');
+	}, 300);
+
+	const { value, handleChange } = useInput(searchParams.get('keyword') || '', debounce);
 
 	return (
 		<Input
 			type="text"
-			value={searchWord}
-			onChange={handleInputChange}
+			value={value}
+			onChange={handleChange}
 			placeholder="Search for a language or skill you want to learn."
 		/>
 	);

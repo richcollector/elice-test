@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { QUERY_STRING } from '../constant/Constant';
-import useQuery from './useQuery';
-import useDebouce from './useDebounce';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
-export default function useInput() {
-	const { addQuery, clearQuery, getValue } = useQuery();
-	const router = useRouter();
-	const searchParams = useSearchParams();
+export default function useInput(
+	initialInput?: string,
+	additionalChange?: (value: string) => void,
+) {
+	const [value, setValue] = useState(initialInput || '');
 
-	const debounce = useDebouce<string>(value => {
-		if (value) addQuery(QUERY_STRING.keyword, value);
-		else clearQuery(QUERY_STRING.keyword);
-	}, 300);
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (additionalChange) additionalChange(e.target.value);
 
-	const [searchWord, setSearchWord] = useState(searchParams.get(QUERY_STRING.keyword) || '');
-
-	useEffect(() => {
-		const before = getValue(QUERY_STRING.keyword) ?? '';
-		if (before && !Array.isArray(before)) {
-			setSearchWord(before);
-		}
-	}, [router.query]);
-
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const inputValue = e.target.value;
-		debounce(inputValue);
-		setSearchWord(inputValue);
+		setValue(e.target.value);
 	};
 
-	return { searchWord, handleInputChange };
+	const reset = () => setValue('');
+
+	return { value, handleChange, reset };
 }
